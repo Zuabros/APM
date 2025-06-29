@@ -741,7 +741,7 @@
   <data name="pictureBox2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAccAAADjCAIAAAB/1EhxAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wQAADsEBuJFr7QAAc21JREFUeF7tXQdYE1nXXgV31/3WT3dXsS6LDRDsKChW7AoWEBRRFAQLCKIoKtJE
+        wAAADsABataJCQAAc21JREFUeF7tXQdYE1nXXgV31/3WT3dXsS6LDRDsKChW7AoWEBRRFAQLCKIoKtJE
         em+RiIqKCooK2BBWBEVAaYuIiPAjRX+a/FIWyJfwJfPwz6RMMpNkkkBwzQzvcx6vmblM5pR7cueec898
         19PTU9gTNUAD9DXpu+++Qx0ZoAHCDUFeVUZNnLAjEweM40Z3xDRCwg49bILFMuBVZY9wwDhudEdMIyTs
         0MMmWCwDXlX2CAeM40Z3xDRCwg49bILFMuBVZY9wwDhudCeAkS6fuJcOl7IcLmWfuFLo9riDjO4g+yRc
@@ -1238,50 +1238,13 @@
 </value>
   </data>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>Somente utilize este aplicativo se você leu e concorda com os termos a seguir. Este aplicativo gera modelos de textos relacionados a enquadramento de aposentadoria especial, com objetivo de facilitar a digitação de laudos em tarefas repetitivas, entretanto não realiza análise de enquadramento; não substituindo de forma alguma a análise médico-pericial individual ou análise pericial de requerimentos de B42. Nenhum texto gerado neste programa pode ou deve ser utilizado sem prévia conferência quanto à exatidão legal e concordância do usuário.  Em sua versão original este programa tem garantia de ser livre de vírus, trojans, keyloggers e assemelhados, não ler, gravar, ou acessar qualquer arquivo, registro ou  dado na memória do computador, rede ou discos rígidos, não se conectar ou acessar a internet ou qualquer outra rede, restringindo-se  sua atividade ao ambiente interno do próprio programa, e somente durante sua execução. O aplicativo não se "instala" de nenhuma forma, sendo excluído totalmente ao se apagar o arquivo, podendo ser executado de qualquer pasta, de um pendrive, ou mesmo da nuvem. Esta é uma versão inacabada do aplicativo ainda em fase de desenvolvimento (alfa), com distribuição restrita a alfa-testers, e portanto estando sujeita a erros de lógica, erros tipográficos e bugs em geral. Proibida a venda, cópia ou distribuição, ainda que gratuita ou citada a fonte. Este aplicativo não possui nenhuma relação ou vínculo de qualquer natureza com o INSS, Ministério da Economia, ou qualquer outro órgão público.  O código fonte será disponibilizado se solicitado por motivo justificado.
-Elaborado pelo perito médico federal Ramiro Anzuategui - contato: ramiro.anzuategui@gmail.com
+    <value>Somente utilize este aplicativo se você leu e concorda com os termos a seguir. Este aplicativo gera modelos de textos relacionados a enquadramento de aposentadoria especial, com objetivo de facilitar a digitação de laudos em tarefas repetitivas, entretanto não realiza análise de enquadramento; não substituindo de forma alguma a análise médico-pericial individual ou análise pericial de requerimentos de B42. Nenhum texto gerado neste programa pode ou deve ser utilizado sem prévia conferência quanto à exatidão legal e concordância do usuário. Em sua versão original este programa tem garantia de ser livre de vírus, trojans, keyloggers e assemelhados, não ler, gravar, ou acessar qualquer arquivo, registro ou dado na memória do computador, rede ou discos rígidos, não se conectar ou acessar a internet ou qualquer outra rede, restringindo-se sua atividade ao ambiente interno do próprio programa, e somente durante sua execução. O aplicativo não se "instala" de nenhuma forma, sendo excluído totalmente ao se apagar o arquivo, podendo ser executado de qualquer pasta, de um pendrive, ou mesmo da nuvem. Esta é uma versão em desenvolvimento (beta), sujeita a erros de lógica, erros tipográficos e bugs em geral. Proibida a venda, cópia ou distribuição, ainda que gratuita ou citada a fonte. Este aplicativo não possui nenhuma relação ou vínculo de qualquer natureza com o INSS, Ministério da Economia, ou qualquer outro órgão público. O código fonte será disponibilizado se solicitado por motivo justificado. Elaborado pelo Dr. Ramiro Ayres Reggiani - CRM-PR 22.820 RQE 25.729 - Perito Médico Federal - contato: ramiro.anzuategui@gmail.com - WhatsApp: 42-99923-8123.
 
 Histórico de alterações das versões de desenvolvimento:
 
-v 1.24a
-- Alterações internas no código
-
-v 1.23a 
-- Incluído gerenciamento de erros críticos
-
-v 1.22a
-- Incluído gerenciamento de erro crítico no extrator em caso de data inválida
-
-v 1.21a
-- Incluído extrator de datas de início e fim
-- Eletricidade: Corrigido erro na lógica (exposição eventual)
-- Ruído: Alterado texto (mudança de layout), incluída opção de unidade "??"
-
-v 1.20a
-- Vibração incluído para períodos até 2014
-- Calor: desabilitados campos não utilizáveis conforme a data
-- Ruído: Correção de bugs,  melhorias no texto e na interface
-- Eletricidade: Correção de bugs
-- Biológico: Incluída profissão de auxiliar/técnico de laboratório
-- Radiações não ionizantes: Melhora no texto
-- Químicos: inclusão de alguns nomes comerciais no modo busca
-
-v 1.13a
-- "iniciar novo requerente" agora reseta método do ruído
-- Incluído código do calor
-- Corrigido texto do químico (exposição eventual)
-- Corrigidos erros de digitação nas listas dos químicos
-- Corrigida divisao dos períodos
-
-v 1.12a
-- Alterações de estética pequenas
-- Correção de texto dos químicos  (número do decreto)
-- Calor: Correção de bug no texto 
-- Eletricidade: Opção de unidade incorreta
-- Químicos: Botão de apagar a lista; 
-- Químicos: Ao iniciar novo requerente limpa a lista
-- Biológicos: Novas profissões incluídas
-- Químico: Incluídas referências de quantitativos (precisa testar e conferir os valores)</value>
+v 2.0a: 
+- Início da adaptação do código legado para novas tecnologias de inteligência artificial  
+</value>
   </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>25</value>

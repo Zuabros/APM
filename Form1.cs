@@ -411,6 +411,7 @@ namespace Aposent_o_matic
             public bool tudo; // enquadrou tudo
             public bool epoca; // epoca de enquadramento, para eletreicidade, frio e umidade antes de 05/03/97
             public bool outros;
+            public bool especial; // flag para condições espciais, como NEN
         }
 
         // ---------------------------------------
@@ -613,8 +614,12 @@ namespace Aposent_o_matic
             if ((metodo == 1 || metodo == 2) && j.metodo == 12) ruido.metodo = true;  // um dos dois válidos
             //if (metodo == 99) ruido.metodo = false;   
             if ((metodo == 2 || metodo == 12) && j.metodo == 1 && cblayout.Checked) ruido.metodo = true;
-            if (ruido.limite && ruido.metodo && ruido.unidade && ruido.permanencia) ruido.tudo = true;
-        }
+            
+            if (!cb_usou_NEN.Checked && j.metodo == 2)  ruido.especial = false; // seta flag de nao uso de NEN
+
+            ruido.tudo = (ruido.limite && ruido.metodo && ruido.unidade && ruido.permanencia && ruido.outros);
+
+	}
         
         // ---------------------------------------------------------------------------------------
         // Função testaele -> verifica se enquadra a eletricidade  
@@ -744,8 +749,8 @@ namespace Aposent_o_matic
         void limpatudo()
         {
             // limpa variaveis ruido 
-            ruido.limite = ruido.metodo = ruido.permanencia = ruido.tudo = ruido.unidade = false;
-            ruido.permanencia = true;
+            ruido.limite = ruido.metodo = ruido.tudo = ruido.unidade = ruido.especial = false;
+            ruido.permanencia = cbruidoperma.Checked; 
             popularuido(cbruido.Checked);
             // limpa variaveis eletricidade 
             ele.tudo = true; ele.epoca = true; ele.permanencia = true; ele.limite = true;
@@ -879,10 +884,30 @@ namespace Aposent_o_matic
                     if (cbunit.Checked && !rbrunaoinformado.Checked) // nao aceita unidade
                     {
                         laudo += $"A unidade de medida sonora informada no PPP ({cbbunit.SelectedItem.ToString()}) não é válida, somente sendo " +
-                            $"aceita a unidade dB(A). ";
-                    }
-                }
-            }
+                            $"aceita a unidade dB(A) ou NEN. ";
+     }
+     
+		 if (!ruido.especial)
+		 {
+			laudo += "Valores não expressos em NEN: Mesmo com indicação de uso da metodologia da NHO-01, " +
+							 "sem que haja a menção por escrito do uso da NEN nos campos 15.4 ou 15.5 do PPP, " +
+							 "não poderá ser aceita, uma vez que dentre as metodologias da NHO-01 encontram-se " +
+							 "outras formas de aferição, tais como Leq e TWA. ";
+		 }
+
+
+
+
+
+
+
+
+
+
+
+
+		}
+   }
             //---------
             if (cbeletricidade.Checked) // deve analisar eletrecidade. 
             {
@@ -3473,23 +3498,23 @@ namespace Aposent_o_matic
 		 }
 		}
 
-		// Altera a cor das datas baseado no sucesso da extração
+		// Altera a cor dos labels baseado no sucesso da extração
 		if (sucessoInicio)
 		{
-		 dbinicio.ForeColor = Color.DarkBlue;  // Azul escuro para sucesso
+		 label2.ForeColor = Color.Blue;  // Azul para sucesso
 		}
 		else
 		{
-		 dbinicio.ForeColor = Color.Red;       // Vermelho para erro
+		 label2.ForeColor = Color.Red;   // Vermelho para erro
 		}
 
 		if (sucessoFim)
 		{
-		 dbfim.ForeColor = Color.DarkBlue;     // Azul escuro para sucesso
+		 label3.ForeColor = Color.Blue;  // Azul para sucesso
 		}
 		else
 		{
-		 dbfim.ForeColor = Color.Red;          // Vermelho para erro
+		 label3.ForeColor = Color.Red;   // Vermelho para erro
 		}
 
 		// Popular o nome da empresa na textbox tb_empresa
@@ -3505,7 +3530,10 @@ namespace Aposent_o_matic
 	 }
 	}
 
-
+	private void button69_Click(object sender, EventArgs e)
+	{
+   fala("Períodos e Metodologias para Ruído:\r\nAté 18/11/2003:\r\n\r\nMetodologia: NR-15 (obrigatória)\r\nNão exigia NEN\r\n\r\n19/11/2003 a 31/12/2003:\r\n\r\nPeríodo de transição - eram aceitas duas metodologias:\r\n\r\nNR-15 (tradicional) OU\r\nNHO-01 da FUNDACENTRO (facultativa)\r\n\r\n\r\nSe usasse NHO-01, deveria usar NEN\r\n\r\nA partir de 1º/1/2004:\r\n\r\nMetodologia NHO-01 tornou-se obrigatória\r\nNEN passou a ser obrigatório\r\nLimite de tolerância: NEN superior a 85 dB(A)\r\n\r\nPontos importantes do manual:\r\n\r\n\"Para períodos a serem analisados a partir de 1º/1/2004 é obrigatório que seja utilizada a metodologia da NHO-01 da FUNDACENTRO, devendo estar consignado no PPP os valores de NPS expressos em NEN.\"\r\nA menção do uso da NEN deve constar no campo 15.4 (intensidade/concentração) ou no campo 15.5 (técnica utilizada) do PPP\r\nA simples menção da NHO-01 sem especificar o uso do NEN não é aceita, pois a NHO-01 inclui outras formas de aferição como Leq e TWA");
+	}
 
 	private void tabPage1_Click(object sender, EventArgs e)
         {

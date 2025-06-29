@@ -206,6 +206,7 @@
 	 this.cbruneoutro = new System.Windows.Forms.CheckBox();
 	 this.cbruidoperma = new System.Windows.Forms.CheckBox();
 	 this.tabPage11 = new System.Windows.Forms.TabPage();
+	 this.tb_empresa = new System.Windows.Forms.TextBox();
 	 this.button60 = new System.Windows.Forms.Button();
 	 this.label29 = new System.Windows.Forms.Label();
 	 this.rtbextrator = new System.Windows.Forms.RichTextBox();
@@ -440,7 +441,9 @@
 	 this.button31 = new System.Windows.Forms.Button();
 	 this.tbchars = new System.Windows.Forms.TextBox();
 	 this.button34 = new System.Windows.Forms.Button();
-	 this.tb_empresa = new System.Windows.Forms.TextBox();
+	 this.groupBox11 = new System.Windows.Forms.GroupBox();
+	 this.cb_usou_NEN = new System.Windows.Forms.CheckBox();
+	 this.button69 = new System.Windows.Forms.Button();
 	 this.tabPage6.SuspendLayout();
 	 this.gbcalor98b.SuspendLayout();
 	 this.gbca97.SuspendLayout();
@@ -491,6 +494,7 @@
 	 this.groupBox8.SuspendLayout();
 	 this.groupBox7.SuspendLayout();
 	 this.tabPage13.SuspendLayout();
+	 this.groupBox11.SuspendLayout();
 	 this.SuspendLayout();
 	 // 
 	 // toolTip1
@@ -2356,6 +2360,8 @@
 	 // 
 	 // gbrmeto
 	 // 
+	 this.gbrmeto.Controls.Add(this.button69);
+	 this.gbrmeto.Controls.Add(this.cb_usou_NEN);
 	 this.gbrmeto.Controls.Add(this.button51);
 	 this.gbrmeto.Controls.Add(this.tbruimetodooutro);
 	 this.gbrmeto.Controls.Add(this.rbruimetodooutro);
@@ -2496,7 +2502,7 @@
 	 // 
 	 // tabPage11
 	 // 
-	 this.tabPage11.Controls.Add(this.tb_empresa);
+	 this.tabPage11.Controls.Add(this.groupBox11);
 	 this.tabPage11.Controls.Add(this.button60);
 	 this.tabPage11.Controls.Add(this.label29);
 	 this.tabPage11.Controls.Add(this.rtbextrator);
@@ -2507,9 +2513,16 @@
 	 this.tabPage11.TabIndex = 10;
 	 this.tabPage11.Text = "Período";
 	 // 
+	 // tb_empresa
+	 // 
+	 this.tb_empresa.Location = new System.Drawing.Point(6, 26);
+	 this.tb_empresa.Name = "tb_empresa";
+	 this.tb_empresa.Size = new System.Drawing.Size(440, 20);
+	 this.tb_empresa.TabIndex = 39;
+	 // 
 	 // button60
 	 // 
-	 this.button60.Location = new System.Drawing.Point(385, 96);
+	 this.button60.Location = new System.Drawing.Point(414, 120);
 	 this.button60.Name = "button60";
 	 this.button60.Size = new System.Drawing.Size(23, 23);
 	 this.button60.TabIndex = 38;
@@ -4989,12 +5002,35 @@
 	 this.button34.UseVisualStyleBackColor = true;
 	 this.button34.Click += new System.EventHandler(this.button34_Click);
 	 // 
-	 // tb_empresa
+	 // groupBox11
 	 // 
-	 this.tb_empresa.Location = new System.Drawing.Point(168, 64);
-	 this.tb_empresa.Name = "tb_empresa";
-	 this.tb_empresa.Size = new System.Drawing.Size(240, 20);
-	 this.tb_empresa.TabIndex = 39;
+	 this.groupBox11.Controls.Add(this.tb_empresa);
+	 this.groupBox11.Location = new System.Drawing.Point(178, 12);
+	 this.groupBox11.Name = "groupBox11";
+	 this.groupBox11.Size = new System.Drawing.Size(470, 72);
+	 this.groupBox11.TabIndex = 40;
+	 this.groupBox11.TabStop = false;
+	 this.groupBox11.Text = "Empresa";
+	 // 
+	 // cb_usou_NEN
+	 // 
+	 this.cb_usou_NEN.AutoSize = true;
+	 this.cb_usou_NEN.Location = new System.Drawing.Point(9, 76);
+	 this.cb_usou_NEN.Name = "cb_usou_NEN";
+	 this.cb_usou_NEN.Size = new System.Drawing.Size(158, 17);
+	 this.cb_usou_NEN.TabIndex = 45;
+	 this.cb_usou_NEN.Text = "Valores informados em NEN";
+	 this.cb_usou_NEN.UseVisualStyleBackColor = true;
+	 // 
+	 // button69
+	 // 
+	 this.button69.Location = new System.Drawing.Point(173, 74);
+	 this.button69.Name = "button69";
+	 this.button69.Size = new System.Drawing.Size(23, 23);
+	 this.button69.TabIndex = 46;
+	 this.button69.Text = "?";
+	 this.button69.UseVisualStyleBackColor = true;
+	 this.button69.Click += new System.EventHandler(this.button69_Click);
 	 // 
 	 // Form1
 	 // 
@@ -5104,6 +5140,8 @@
 	 this.groupBox7.ResumeLayout(false);
 	 this.groupBox7.PerformLayout();
 	 this.tabPage13.ResumeLayout(false);
+	 this.groupBox11.ResumeLayout(false);
+	 this.groupBox11.PerformLayout();
 	 this.ResumeLayout(false);
 	 this.PerformLayout();
 
@@ -5521,6 +5559,9 @@
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.Label label30;
 	private System.Windows.Forms.TextBox tb_empresa;
+	private System.Windows.Forms.GroupBox groupBox11;
+	private System.Windows.Forms.Button button69;
+	private System.Windows.Forms.CheckBox cb_usou_NEN;
  }
 }
 
