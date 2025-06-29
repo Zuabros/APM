@@ -435,17 +435,12 @@
 	 this.label16 = new System.Windows.Forms.Label();
 	 this.label15 = new System.Windows.Forms.Label();
 	 this.tbouprofissaoppp = new System.Windows.Forms.TextBox();
-	 this.Ferramentas = new System.Windows.Forms.TabPage();
-	 this.button70 = new System.Windows.Forms.Button();
-	 this.button69 = new System.Windows.Forms.Button();
-	 this.label40 = new System.Windows.Forms.Label();
-	 this.textBox19 = new System.Windows.Forms.TextBox();
-	 this.listBox1 = new System.Windows.Forms.ListBox();
 	 this.tabPage13 = new System.Windows.Forms.TabPage();
 	 this.richTextBox1 = new System.Windows.Forms.RichTextBox();
 	 this.button31 = new System.Windows.Forms.Button();
 	 this.tbchars = new System.Windows.Forms.TextBox();
 	 this.button34 = new System.Windows.Forms.Button();
+	 this.tb_empresa = new System.Windows.Forms.TextBox();
 	 this.tabPage6.SuspendLayout();
 	 this.gbcalor98b.SuspendLayout();
 	 this.gbca97.SuspendLayout();
@@ -495,7 +490,6 @@
 	 this.tabPage14.SuspendLayout();
 	 this.groupBox8.SuspendLayout();
 	 this.groupBox7.SuspendLayout();
-	 this.Ferramentas.SuspendLayout();
 	 this.tabPage13.SuspendLayout();
 	 this.SuspendLayout();
 	 // 
@@ -2502,6 +2496,7 @@
 	 // 
 	 // tabPage11
 	 // 
+	 this.tabPage11.Controls.Add(this.tb_empresa);
 	 this.tabPage11.Controls.Add(this.button60);
 	 this.tabPage11.Controls.Add(this.label29);
 	 this.tabPage11.Controls.Add(this.rtbextrator);
@@ -2605,7 +2600,6 @@
 	 this.cbquimicos.Controls.Add(this.tabPage8);
 	 this.cbquimicos.Controls.Add(this.tabPage15);
 	 this.cbquimicos.Controls.Add(this.tabPage14);
-	 this.cbquimicos.Controls.Add(this.Ferramentas);
 	 this.cbquimicos.Controls.Add(this.tabPage13);
 	 this.cbquimicos.Location = new System.Drawing.Point(3, 3);
 	 this.cbquimicos.Name = "cbquimicos";
@@ -4948,64 +4942,6 @@
 	 this.tbouprofissaoppp.Size = new System.Drawing.Size(212, 20);
 	 this.tbouprofissaoppp.TabIndex = 0;
 	 // 
-	 // Ferramentas
-	 // 
-	 this.Ferramentas.Controls.Add(this.button70);
-	 this.Ferramentas.Controls.Add(this.button69);
-	 this.Ferramentas.Controls.Add(this.label40);
-	 this.Ferramentas.Controls.Add(this.textBox19);
-	 this.Ferramentas.Controls.Add(this.listBox1);
-	 this.Ferramentas.Location = new System.Drawing.Point(4, 22);
-	 this.Ferramentas.Name = "Ferramentas";
-	 this.Ferramentas.Size = new System.Drawing.Size(939, 352);
-	 this.Ferramentas.TabIndex = 18;
-	 this.Ferramentas.Text = "CID-10";
-	 this.Ferramentas.UseVisualStyleBackColor = true;
-	 // 
-	 // button70
-	 // 
-	 this.button70.Location = new System.Drawing.Point(384, 25);
-	 this.button70.Name = "button70";
-	 this.button70.Size = new System.Drawing.Size(75, 23);
-	 this.button70.TabIndex = 5;
-	 this.button70.Text = "Gerar código";
-	 this.button70.UseVisualStyleBackColor = true;
-	 this.button70.Click += new System.EventHandler(this.button70_Click);
-	 // 
-	 // button69
-	 // 
-	 this.button69.Location = new System.Drawing.Point(294, 24);
-	 this.button69.Name = "button69";
-	 this.button69.Size = new System.Drawing.Size(75, 23);
-	 this.button69.TabIndex = 4;
-	 this.button69.Text = "Carrega";
-	 this.button69.UseVisualStyleBackColor = true;
-	 this.button69.Click += new System.EventHandler(this.button69_Click);
-	 // 
-	 // label40
-	 // 
-	 this.label40.AutoSize = true;
-	 this.label40.Location = new System.Drawing.Point(17, 29);
-	 this.label40.Name = "label40";
-	 this.label40.Size = new System.Drawing.Size(40, 13);
-	 this.label40.TabIndex = 3;
-	 this.label40.Text = "Busca:";
-	 // 
-	 // textBox19
-	 // 
-	 this.textBox19.Location = new System.Drawing.Point(63, 27);
-	 this.textBox19.Name = "textBox19";
-	 this.textBox19.Size = new System.Drawing.Size(225, 20);
-	 this.textBox19.TabIndex = 2;
-	 // 
-	 // listBox1
-	 // 
-	 this.listBox1.FormattingEnabled = true;
-	 this.listBox1.Location = new System.Drawing.Point(15, 61);
-	 this.listBox1.Name = "listBox1";
-	 this.listBox1.Size = new System.Drawing.Size(760, 277);
-	 this.listBox1.TabIndex = 0;
-	 // 
 	 // tabPage13
 	 // 
 	 this.tabPage13.Controls.Add(this.richTextBox1);
@@ -5053,6 +4989,13 @@
 	 this.button34.UseVisualStyleBackColor = true;
 	 this.button34.Click += new System.EventHandler(this.button34_Click);
 	 // 
+	 // tb_empresa
+	 // 
+	 this.tb_empresa.Location = new System.Drawing.Point(168, 64);
+	 this.tb_empresa.Name = "tb_empresa";
+	 this.tb_empresa.Size = new System.Drawing.Size(240, 20);
+	 this.tb_empresa.TabIndex = 39;
+	 // 
 	 // Form1
 	 // 
 	 this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5067,7 +5010,7 @@
 	 this.Controls.Add(this.button1);
 	 this.ImeMode = System.Windows.Forms.ImeMode.Off;
 	 this.Name = "Form1";
-	 this.Text = "APM versão 1.24.23a  - Gerador de Textos para Laudos de Aposentadoria Especial";
+	 this.Text = "APM versão 2.0b edição do desenvolvedor - Distribuição proibida";
 	 this.Load += new System.EventHandler(this.Form1_Load);
 	 this.tabPage6.ResumeLayout(false);
 	 this.tabPage6.PerformLayout();
@@ -5160,8 +5103,6 @@
 	 this.groupBox8.ResumeLayout(false);
 	 this.groupBox7.ResumeLayout(false);
 	 this.groupBox7.PerformLayout();
-	 this.Ferramentas.ResumeLayout(false);
-	 this.Ferramentas.PerformLayout();
 	 this.tabPage13.ResumeLayout(false);
 	 this.ResumeLayout(false);
 	 this.PerformLayout();
@@ -5541,7 +5482,6 @@
         private System.Windows.Forms.CheckBox checkBox15;
         private System.Windows.Forms.CheckBox checkBox14;
         private System.Windows.Forms.CheckBox checkBox9;
-        private System.Windows.Forms.TabPage Ferramentas;
         private System.Windows.Forms.GroupBox groupBox10;
         private System.Windows.Forms.Button button63;
         private System.Windows.Forms.TextBox textBox10;
@@ -5580,11 +5520,7 @@
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.Button button69;
-        private System.Windows.Forms.Label label40;
-        private System.Windows.Forms.TextBox textBox19;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Button button70;
-    }
+	private System.Windows.Forms.TextBox tb_empresa;
+ }
 }
 

@@ -13,17 +13,21 @@ namespace Aposent_o_matic
     public partial class Form1 : Form
     {
 
-        // ---------------------------------
-        // VERIFICA SE NÃO EXPIROU
-        // ---------------------------------
-        void checkexpire()
-        {
-            DateTime now = DateTime.Now;
-            var expire = new DateTime(2023, 08, 09); // expire date 
-            if (DateTime.Compare(now, expire) > 0) Environment.Exit(1); // exit program
-            if (DateTime.Compare(dbfim.Value, expire) > 0) Environment.Exit(1); // exit program
-        }
-        public Form1()
+	// ---------------------------------
+	// VERIFICA SE NÃO EXPIROU
+	// ---------------------------------
+	void checkexpire()
+	{
+	 // Developer's shortcut - se Shift estiver pressionado, pula a verificação
+	 if (Control.ModifierKeys == Keys.Shift)
+		return;
+
+	 DateTime now = DateTime.Now;
+	 var expire = new DateTime(2026, 12, 31); // expire date 
+	 if (DateTime.Compare(now, expire) > 0) Environment.Exit(1); // exit program
+	 if (DateTime.Compare(dbfim.Value, expire) > 0) Environment.Exit(1); // exit program
+	}
+	public Form1()
         {
             InitializeComponent();
             checkexpire();
@@ -1978,7 +1982,8 @@ namespace Aposent_o_matic
                 int fracs = seg.Count; // Numero de periodos 
                 if (true) //
                 {
-                    if (fracs > 1) fracao += "Houve necessidade de fracionamento do período pelo perito, tendo em vista os nuances da legislação aplicável" +
+     if (tb_empresa.Text != "") fracao += $"Empresa: {tb_empresa.Text}" + ENTER;
+     if (fracs > 1) fracao += "Houve necessidade de fracionamento do período pelo perito, tendo em vista os nuances da legislação aplicável" +
                         " ao longo do tempo, conforme se segue: " + ENTER;
                     else fracao += "Resumo do enquadramento: " + ENTER;
                     // Iterate lista de periodos já fragmentados 
@@ -2028,7 +2033,8 @@ namespace Aposent_o_matic
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
+
+   tb_empresa.Text = "";
             cbvibra.Checked = false;
             gbvinter.Enabled = false;
             gbvibra97.Enabled = false;
@@ -2043,7 +2049,8 @@ namespace Aposent_o_matic
             cberg2.Checked = cbergo.Checked = cbfrio.Checked = cbfis.Checked = cbrni.Checked = 
             cbusacalor.Checked = cbumidade.Checked =  false;
             while (lbqfinal.Items.Count > 0) apagaum(); // apaga lista de quimicos 
-        }
+	 rtbextrator.Focus(); // foca janela do extrator
+	}
 
         private void cbbmetodo_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -3370,72 +3377,137 @@ namespace Aposent_o_matic
                 $"10 / 10 / 1991{ENTER}";
 
         }
-        // EXTRATOR DE DATA
-        private void richTextBox2_TextChanged(object sender, EventArgs e)
-        {
-            string din = ""; // inicio extraído 
-            string dfim = ""; // fim extraído 
-            int count = 0; // conta digitos 
-            int i = 0; // posicionador na string
-            bool gofim = false;
-            foreach (char letra in rtbextrator.Text)
-                if (Char.IsDigit(letra)) count++;
-            if (count >= 16)
-                foreach (char letra in rtbextrator.Text)
-                {
-                    if (Char.IsDigit(letra))
-                    {
-                        if (i == 0 || i==1) din += letra;
-                        else if (i == 2 || i == 3) din += letra;
-                        else if (i >=4 && i <= 7) din += letra;
-                        if (i == 1 || i == 3) din += '/';
-                        
+	// EXTRATOR DE DATA ATUALIZADO PARA NOVO FORMATO INSS
+	private void richTextBox2_TextChanged(object sender, EventArgs e)
+	{
+	 try
+	 {
+		string texto = rtbextrator.Text;
 
-                        if (i == 8 || i == 9) dfim += letra;
-                        else if (i == 10 || i == 11) dfim += letra;
-                        else if (i >= 12 && i <= 15) dfim += letra;
-                        if (i == 9 || i == 11) dfim += '/';
-                        i++;
-                        if (i > 15) break;
-                        
-                    }
-                }
-            try
-            {
-                dbinicio.Value = DateTime.Parse(din);
-                dbfim.Value = DateTime.Parse(dfim);
-            }
-            catch 
-            {  }
-        }
+		// Limpa variáveis
+		string nomeEmpresa = "";
+		string dataInicio = "";
+		string dataFim = "";
 
-        private void button69_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog f = new OpenFileDialog();
-            if (f.ShowDialog() == DialogResult.OK)
-            {
-                listBox1.Items.Clear();
+		// Divide o texto em linhas para facilitar a análise
+		string[] linhas = texto.Split(new string[] { "\r\n", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries);
 
-                List<string> lines = new List<string>();
-                using (System.IO.StreamReader r = new System.IO.StreamReader(f.OpenFile()))
-                {
-                    string line;
-                    while ((line = r.ReadLine()) != null)
-                    {
-                        listBox1.Items.Add(line);
+		for (int i = 0; i < linhas.Length; i++)
+		{
+		 string linha = linhas[i].Trim();
 
-                    }
-                }
-            }
-        }
+		 // Procura pelo nome da empresa
+		 if (linha.Contains("NOME DA EMPRESA") && linha.Contains("INSS"))
+		 {
+			// A próxima linha deve conter o nome da empresa
+			if (i + 1 < linhas.Length)
+			{
+			 nomeEmpresa = linhas[i + 1].Trim();
+			}
+		 }
 
-        private void button70_Click(object sender, EventArgs e)
-        {
-            foreach (var item in listBox1.Items)
-                tblaudo.Text += $"\"{item}\"{ENTER}";
-        }
+		 // Procura pela data de início
+		 else if (linha.Contains("DATA DE INICIO DO PERÍODO") && linha.Contains("INSS"))
+		 {
+			// A próxima linha deve conter a data de início
+			if (i + 1 < linhas.Length)
+			{
+			 dataInicio = linhas[i + 1].Trim();
+			}
+		 }
 
-        private void tabPage1_Click(object sender, EventArgs e)
+		 // Procura pela data de fim
+		 else if (linha.Contains("DATA FIM DO PERÍODO") && linha.Contains("INSS"))
+		 {
+			// A próxima linha deve conter a data de fim
+			if (i + 1 < linhas.Length)
+			{
+			 dataFim = linhas[i + 1].Trim();
+			}
+		 }
+		}
+
+		// Método alternativo: busca diretamente no texto usando regex-like approach
+		if (string.IsNullOrEmpty(dataInicio) || string.IsNullOrEmpty(dataFim))
+		{
+		 // Busca padrões de data no formato dd/mm/yyyy
+		 var datasEncontradas = new List<string>();
+
+		 foreach (string linha in linhas)
+		 {
+			// Verifica se a linha contém uma data no formato dd/mm/yyyy
+			if (System.Text.RegularExpressions.Regex.IsMatch(linha.Trim(), @"^\d{2}/\d{2}/\d{4}$"))
+			{
+			 datasEncontradas.Add(linha.Trim());
+			}
+		 }
+
+		 // Se encontrou exatamente 2 datas, assume que são início e fim
+		 if (datasEncontradas.Count >= 2)
+		 {
+			dataInicio = datasEncontradas[0];
+			dataFim = datasEncontradas[1];
+		 }
+		}
+
+		// Variáveis para controlar sucesso da extração
+		bool sucessoInicio = false;
+		bool sucessoFim = false;
+
+		// Tenta converter e popular os campos
+		if (!string.IsNullOrEmpty(dataInicio))
+		{
+		 if (DateTime.TryParse(dataInicio, out DateTime dtInicio))
+		 {
+			dbinicio.Value = dtInicio;
+			sucessoInicio = true;
+		 }
+		}
+
+		if (!string.IsNullOrEmpty(dataFim))
+		{
+		 if (DateTime.TryParse(dataFim, out DateTime dtFim))
+		 {
+			dbfim.Value = dtFim;
+			sucessoFim = true;
+		 }
+		}
+
+		// Altera a cor das datas baseado no sucesso da extração
+		if (sucessoInicio)
+		{
+		 dbinicio.ForeColor = Color.DarkBlue;  // Azul escuro para sucesso
+		}
+		else
+		{
+		 dbinicio.ForeColor = Color.Red;       // Vermelho para erro
+		}
+
+		if (sucessoFim)
+		{
+		 dbfim.ForeColor = Color.DarkBlue;     // Azul escuro para sucesso
+		}
+		else
+		{
+		 dbfim.ForeColor = Color.Red;          // Vermelho para erro
+		}
+
+		// Popular o nome da empresa na textbox tb_empresa
+		if (!string.IsNullOrEmpty(nomeEmpresa) && tb_empresa != null)
+		{
+		 tb_empresa.Text = nomeEmpresa;
+		}
+	 }
+	 catch (Exception ex)
+	 {
+		// Em caso de erro, não faz nada (silent fail como no código original)
+		// Pode adicionar um log ou debug se necessário
+	 }
+	}
+
+
+
+	private void tabPage1_Click(object sender, EventArgs e)
         {
 
         }
