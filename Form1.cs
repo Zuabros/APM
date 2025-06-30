@@ -426,7 +426,7 @@ namespace Aposent_o_matic
             inicio = new DateTime(1964, 01, 01),
             fim = new DateTime(1996, 10, 13),
             limite = 80,
-            metodo = 1,
+            metodo = -1,
             lei = "Decreto nº 53.831, de 1964",
             EPI = false,
             EPC = false,
@@ -442,7 +442,7 @@ namespace Aposent_o_matic
             inicio = new DateTime(1996, 10, 14),
             fim = new DateTime(1997, 03, 05),
             limite = 80,
-            metodo = 1,
+            metodo = -1,
             lei = "Decreto nº 53.831, de 1964 e MP nº 1.523, de 1996",
             EPI = false,
             EPC = true,
@@ -459,7 +459,7 @@ namespace Aposent_o_matic
             inicio = new DateTime(1997, 03, 06),
             fim = new DateTime(1998, 12, 02),
             limite = 90,
-            metodo = 1,
+            metodo = -1,
             lei = "Decreto nº 2.172, de 1997",
             EPC = true,
             EPI = false,
@@ -614,7 +614,9 @@ namespace Aposent_o_matic
 		 (metodo == j.metodo) // método exato 
 		 || ((metodo == 1 || metodo == 2) && j.metodo == 12) // aceita qualquer um dos dois 
 		 || ((metodo == 2 || metodo == 12) && j.metodo == 1 && cblayout.Checked); // Aceita método novo na época velha (layout mantido)
-	 ruido.especial = cb_usou_NEN.Checked || metodo != 2; // seta true se usou NEN ou não é NHO
+   if (j.metodo == -1) ruido.metodo = true; // Nao exige método antes de 03/12/1998 
+   
+   ruido.especial = cb_usou_NEN.Checked || metodo != 2; // seta true se usou NEN ou não é NHO
 
 
    // CASO PARTICULAR DO NEM 
@@ -700,7 +702,7 @@ namespace Aposent_o_matic
         // -----------------------------------------------------------------------------
         string getmetodo(int method, bool literal = false)
         {
-            
+            if (method == -1) return "adequada"; // não exige método antes de 03/12/1998
             //if (rbmetodo2.Checked) return tbmetodo.Text;
             if (method == 1) return "NR-15 do MTE";
             else if (method == 12)
@@ -849,7 +851,11 @@ namespace Aposent_o_matic
 
                     laudo += " Período ENQUADRADO, considerando que houve exposição " +
                         "permanente, aferida utilizando metodologia correta, acima do limite definido pela legislação.";
-                    if (cblayout.Checked) laudo += " Há informação expressa de que não houve alteração no ambiente de trabalho, nos termos "
+
+     if (j.metodo == -1) laudo += " Até 02/12/1998 aplicava-se análise qualitativa " +
+       "dos agentes nocivos, sem exigência de aplicação da NR-15.";
+
+										if (cblayout.Checked) laudo += " Há informação expressa de que não houve alteração no ambiente de trabalho, nos termos "
                             + "do Art. 261 da IN 77/2015.";
 
                 }
