@@ -201,11 +201,14 @@
 	 this.rbmetodo = new System.Windows.Forms.RadioButton();
 	 this.cbbmetodo = new System.Windows.Forms.ComboBox();
 	 this.gbrunit = new System.Windows.Forms.GroupBox();
-	 this.cbunit = new System.Windows.Forms.CheckBox();
+	 this.button69 = new System.Windows.Forms.Button();
+	 this.cb_unidade_errada = new System.Windows.Forms.CheckBox();
+	 this.cb_usou_NEN = new System.Windows.Forms.CheckBox();
 	 this.cbbunit = new System.Windows.Forms.ComboBox();
 	 this.cbruneoutro = new System.Windows.Forms.CheckBox();
 	 this.cbruidoperma = new System.Windows.Forms.CheckBox();
 	 this.tabPage11 = new System.Windows.Forms.TabPage();
+	 this.groupBox11 = new System.Windows.Forms.GroupBox();
 	 this.tb_empresa = new System.Windows.Forms.TextBox();
 	 this.button60 = new System.Windows.Forms.Button();
 	 this.label29 = new System.Windows.Forms.Label();
@@ -215,7 +218,7 @@
 	 this.label2 = new System.Windows.Forms.Label();
 	 this.dbfim = new System.Windows.Forms.DateTimePicker();
 	 this.dbinicio = new System.Windows.Forms.DateTimePicker();
-	 this.cbquimicos = new System.Windows.Forms.TabControl();
+	 this.tab_maintab = new System.Windows.Forms.TabControl();
 	 this.tabPage4 = new System.Windows.Forms.TabPage();
 	 this.gbfrio1 = new System.Windows.Forms.GroupBox();
 	 this.button38 = new System.Windows.Forms.Button();
@@ -437,13 +440,15 @@
 	 this.label15 = new System.Windows.Forms.Label();
 	 this.tbouprofissaoppp = new System.Windows.Forms.TextBox();
 	 this.tabPage13 = new System.Windows.Forms.TabPage();
+	 this.button70 = new System.Windows.Forms.Button();
 	 this.richTextBox1 = new System.Windows.Forms.RichTextBox();
 	 this.button31 = new System.Windows.Forms.Button();
 	 this.tbchars = new System.Windows.Forms.TextBox();
 	 this.button34 = new System.Windows.Forms.Button();
-	 this.groupBox11 = new System.Windows.Forms.GroupBox();
-	 this.cb_usou_NEN = new System.Windows.Forms.CheckBox();
-	 this.button69 = new System.Windows.Forms.Button();
+	 this.tb_datas_display = new System.Windows.Forms.TextBox();
+	 this.cb_autocopy = new System.Windows.Forms.CheckBox();
+	 this.button71 = new System.Windows.Forms.Button();
+	 this.button72 = new System.Windows.Forms.Button();
 	 this.tabPage6.SuspendLayout();
 	 this.gbcalor98b.SuspendLayout();
 	 this.gbca97.SuspendLayout();
@@ -464,8 +469,9 @@
 	 this.gbrmeto.SuspendLayout();
 	 this.gbrunit.SuspendLayout();
 	 this.tabPage11.SuspendLayout();
+	 this.groupBox11.SuspendLayout();
 	 this.groupBox2.SuspendLayout();
-	 this.cbquimicos.SuspendLayout();
+	 this.tab_maintab.SuspendLayout();
 	 this.tabPage4.SuspendLayout();
 	 this.gbfrio1.SuspendLayout();
 	 ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -494,7 +500,6 @@
 	 this.groupBox8.SuspendLayout();
 	 this.groupBox7.SuspendLayout();
 	 this.tabPage13.SuspendLayout();
-	 this.groupBox11.SuspendLayout();
 	 this.SuspendLayout();
 	 // 
 	 // toolTip1
@@ -632,7 +637,7 @@
 	 // 
 	 // button2
 	 // 
-	 this.button2.Location = new System.Drawing.Point(215, 383);
+	 this.button2.Location = new System.Drawing.Point(280, 383);
 	 this.button2.Name = "button2";
 	 this.button2.Size = new System.Drawing.Size(124, 28);
 	 this.button2.TabIndex = 22;
@@ -2360,8 +2365,6 @@
 	 // 
 	 // gbrmeto
 	 // 
-	 this.gbrmeto.Controls.Add(this.button69);
-	 this.gbrmeto.Controls.Add(this.cb_usou_NEN);
 	 this.gbrmeto.Controls.Add(this.button51);
 	 this.gbrmeto.Controls.Add(this.tbruimetodooutro);
 	 this.gbrmeto.Controls.Add(this.rbruimetodooutro);
@@ -2439,7 +2442,9 @@
 	 // 
 	 // gbrunit
 	 // 
-	 this.gbrunit.Controls.Add(this.cbunit);
+	 this.gbrunit.Controls.Add(this.button69);
+	 this.gbrunit.Controls.Add(this.cb_unidade_errada);
+	 this.gbrunit.Controls.Add(this.cb_usou_NEN);
 	 this.gbrunit.Controls.Add(this.cbbunit);
 	 this.gbrunit.Enabled = false;
 	 this.gbrunit.Location = new System.Drawing.Point(305, 32);
@@ -2449,16 +2454,36 @@
 	 this.gbrunit.TabStop = false;
 	 this.gbrunit.Text = "Unidade";
 	 // 
-	 // cbunit
+	 // button69
 	 // 
-	 this.cbunit.AutoSize = true;
-	 this.cbunit.Location = new System.Drawing.Point(5, 51);
-	 this.cbunit.Name = "cbunit";
-	 this.cbunit.Size = new System.Drawing.Size(81, 17);
-	 this.cbunit.TabIndex = 13;
-	 this.cbunit.Text = "Não aceitar";
-	 this.cbunit.UseVisualStyleBackColor = true;
-	 this.cbunit.CheckedChanged += new System.EventHandler(this.cbunit_CheckedChanged);
+	 this.button69.Location = new System.Drawing.Point(60, 67);
+	 this.button69.Name = "button69";
+	 this.button69.Size = new System.Drawing.Size(23, 23);
+	 this.button69.TabIndex = 46;
+	 this.button69.Text = "?";
+	 this.button69.UseVisualStyleBackColor = true;
+	 this.button69.Click += new System.EventHandler(this.button69_Click);
+	 // 
+	 // cb_unidade_errada
+	 // 
+	 this.cb_unidade_errada.AutoSize = true;
+	 this.cb_unidade_errada.Location = new System.Drawing.Point(5, 49);
+	 this.cb_unidade_errada.Name = "cb_unidade_errada";
+	 this.cb_unidade_errada.Size = new System.Drawing.Size(81, 17);
+	 this.cb_unidade_errada.TabIndex = 13;
+	 this.cb_unidade_errada.Text = "Não aceitar";
+	 this.cb_unidade_errada.UseVisualStyleBackColor = true;
+	 this.cb_unidade_errada.CheckedChanged += new System.EventHandler(this.cbunit_CheckedChanged);
+	 // 
+	 // cb_usou_NEN
+	 // 
+	 this.cb_usou_NEN.AutoSize = true;
+	 this.cb_usou_NEN.Location = new System.Drawing.Point(5, 71);
+	 this.cb_usou_NEN.Name = "cb_usou_NEN";
+	 this.cb_usou_NEN.Size = new System.Drawing.Size(49, 17);
+	 this.cb_usou_NEN.TabIndex = 45;
+	 this.cb_usou_NEN.Text = "NEN";
+	 this.cb_usou_NEN.UseVisualStyleBackColor = true;
 	 // 
 	 // cbbunit
 	 // 
@@ -2512,6 +2537,16 @@
 	 this.tabPage11.Size = new System.Drawing.Size(939, 352);
 	 this.tabPage11.TabIndex = 10;
 	 this.tabPage11.Text = "Período";
+	 // 
+	 // groupBox11
+	 // 
+	 this.groupBox11.Controls.Add(this.tb_empresa);
+	 this.groupBox11.Location = new System.Drawing.Point(178, 12);
+	 this.groupBox11.Name = "groupBox11";
+	 this.groupBox11.Size = new System.Drawing.Size(470, 72);
+	 this.groupBox11.TabIndex = 40;
+	 this.groupBox11.TabStop = false;
+	 this.groupBox11.Text = "Empresa";
 	 // 
 	 // tb_empresa
 	 // 
@@ -2599,27 +2634,27 @@
 	 this.dbinicio.Value = new System.DateTime(1992, 1, 1, 0, 0, 0, 0);
 	 this.dbinicio.ValueChanged += new System.EventHandler(this.dbinicio_ValueChanged);
 	 // 
-	 // cbquimicos
+	 // tab_maintab
 	 // 
-	 this.cbquimicos.Controls.Add(this.tabPage11);
-	 this.cbquimicos.Controls.Add(this.tabPage1);
-	 this.cbquimicos.Controls.Add(this.tabPage2);
-	 this.cbquimicos.Controls.Add(this.tabPage5);
-	 this.cbquimicos.Controls.Add(this.tabPage6);
-	 this.cbquimicos.Controls.Add(this.tabPage3);
-	 this.cbquimicos.Controls.Add(this.tabPage4);
-	 this.cbquimicos.Controls.Add(this.tabPage7);
-	 this.cbquimicos.Controls.Add(this.tabPage9);
-	 this.cbquimicos.Controls.Add(this.tabPage8);
-	 this.cbquimicos.Controls.Add(this.tabPage15);
-	 this.cbquimicos.Controls.Add(this.tabPage14);
-	 this.cbquimicos.Controls.Add(this.tabPage13);
-	 this.cbquimicos.Location = new System.Drawing.Point(3, 3);
-	 this.cbquimicos.Name = "cbquimicos";
-	 this.cbquimicos.SelectedIndex = 0;
-	 this.cbquimicos.Size = new System.Drawing.Size(947, 378);
-	 this.cbquimicos.TabIndex = 23;
-	 this.cbquimicos.SelectedIndexChanged += new System.EventHandler(this.cbquimicos_SelectedIndexChanged);
+	 this.tab_maintab.Controls.Add(this.tabPage11);
+	 this.tab_maintab.Controls.Add(this.tabPage1);
+	 this.tab_maintab.Controls.Add(this.tabPage2);
+	 this.tab_maintab.Controls.Add(this.tabPage5);
+	 this.tab_maintab.Controls.Add(this.tabPage6);
+	 this.tab_maintab.Controls.Add(this.tabPage3);
+	 this.tab_maintab.Controls.Add(this.tabPage4);
+	 this.tab_maintab.Controls.Add(this.tabPage7);
+	 this.tab_maintab.Controls.Add(this.tabPage9);
+	 this.tab_maintab.Controls.Add(this.tabPage8);
+	 this.tab_maintab.Controls.Add(this.tabPage15);
+	 this.tab_maintab.Controls.Add(this.tabPage14);
+	 this.tab_maintab.Controls.Add(this.tabPage13);
+	 this.tab_maintab.Location = new System.Drawing.Point(3, 3);
+	 this.tab_maintab.Name = "tab_maintab";
+	 this.tab_maintab.SelectedIndex = 0;
+	 this.tab_maintab.Size = new System.Drawing.Size(947, 378);
+	 this.tab_maintab.TabIndex = 23;
+	 this.tab_maintab.SelectedIndexChanged += new System.EventHandler(this.cbquimicos_SelectedIndexChanged);
 	 // 
 	 // tabPage4
 	 // 
@@ -4957,6 +4992,7 @@
 	 // 
 	 // tabPage13
 	 // 
+	 this.tabPage13.Controls.Add(this.button70);
 	 this.tabPage13.Controls.Add(this.richTextBox1);
 	 this.tabPage13.Location = new System.Drawing.Point(4, 22);
 	 this.tabPage13.Name = "tabPage13";
@@ -4965,19 +5001,29 @@
 	 this.tabPage13.Text = "Termos de Uso";
 	 this.tabPage13.UseVisualStyleBackColor = true;
 	 // 
+	 // button70
+	 // 
+	 this.button70.Location = new System.Drawing.Point(19, 223);
+	 this.button70.Name = "button70";
+	 this.button70.Size = new System.Drawing.Size(98, 23);
+	 this.button70.TabIndex = 1;
+	 this.button70.Text = "Agradeça o autor";
+	 this.button70.UseVisualStyleBackColor = true;
+	 this.button70.Click += new System.EventHandler(this.button70_Click);
+	 // 
 	 // richTextBox1
 	 // 
 	 this.richTextBox1.Location = new System.Drawing.Point(8, 4);
 	 this.richTextBox1.Name = "richTextBox1";
 	 this.richTextBox1.ReadOnly = true;
-	 this.richTextBox1.Size = new System.Drawing.Size(895, 345);
+	 this.richTextBox1.Size = new System.Drawing.Size(925, 345);
 	 this.richTextBox1.TabIndex = 0;
 	 this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
 	 this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
 	 // 
 	 // button31
 	 // 
-	 this.button31.Location = new System.Drawing.Point(345, 383);
+	 this.button31.Location = new System.Drawing.Point(410, 383);
 	 this.button31.Name = "button31";
 	 this.button31.Size = new System.Drawing.Size(51, 28);
 	 this.button31.TabIndex = 24;
@@ -5002,45 +5048,60 @@
 	 this.button34.UseVisualStyleBackColor = true;
 	 this.button34.Click += new System.EventHandler(this.button34_Click);
 	 // 
-	 // groupBox11
+	 // tb_datas_display
 	 // 
-	 this.groupBox11.Controls.Add(this.tb_empresa);
-	 this.groupBox11.Location = new System.Drawing.Point(178, 12);
-	 this.groupBox11.Name = "groupBox11";
-	 this.groupBox11.Size = new System.Drawing.Size(470, 72);
-	 this.groupBox11.TabIndex = 40;
-	 this.groupBox11.TabStop = false;
-	 this.groupBox11.Text = "Empresa";
+	 this.tb_datas_display.Location = new System.Drawing.Point(87, 387);
+	 this.tb_datas_display.Name = "tb_datas_display";
+	 this.tb_datas_display.ReadOnly = true;
+	 this.tb_datas_display.Size = new System.Drawing.Size(143, 20);
+	 this.tb_datas_display.TabIndex = 27;
+	 this.tb_datas_display.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 	 // 
-	 // cb_usou_NEN
+	 // cb_autocopy
 	 // 
-	 this.cb_usou_NEN.AutoSize = true;
-	 this.cb_usou_NEN.Location = new System.Drawing.Point(9, 76);
-	 this.cb_usou_NEN.Name = "cb_usou_NEN";
-	 this.cb_usou_NEN.Size = new System.Drawing.Size(158, 17);
-	 this.cb_usou_NEN.TabIndex = 45;
-	 this.cb_usou_NEN.Text = "Valores informados em NEN";
-	 this.cb_usou_NEN.UseVisualStyleBackColor = true;
+	 this.cb_autocopy.AutoSize = true;
+	 this.cb_autocopy.Checked = true;
+	 this.cb_autocopy.CheckState = System.Windows.Forms.CheckState.Checked;
+	 this.cb_autocopy.Location = new System.Drawing.Point(535, 388);
+	 this.cb_autocopy.Name = "cb_autocopy";
+	 this.cb_autocopy.Size = new System.Drawing.Size(75, 17);
+	 this.cb_autocopy.TabIndex = 28;
+	 this.cb_autocopy.Text = "Auto-Copy";
+	 this.cb_autocopy.UseVisualStyleBackColor = true;
 	 // 
-	 // button69
+	 // button71
 	 // 
-	 this.button69.Location = new System.Drawing.Point(173, 74);
-	 this.button69.Name = "button69";
-	 this.button69.Size = new System.Drawing.Size(23, 23);
-	 this.button69.TabIndex = 46;
-	 this.button69.Text = "?";
-	 this.button69.UseVisualStyleBackColor = true;
-	 this.button69.Click += new System.EventHandler(this.button69_Click);
+	 this.button71.Location = new System.Drawing.Point(663, 384);
+	 this.button71.Name = "button71";
+	 this.button71.Size = new System.Drawing.Size(75, 23);
+	 this.button71.TabIndex = 29;
+	 this.button71.Text = "Crypt";
+	 this.button71.UseVisualStyleBackColor = true;
+	 this.button71.Click += new System.EventHandler(this.button71_Click);
+	 // 
+	 // button72
+	 // 
+	 this.button72.Location = new System.Drawing.Point(608, 384);
+	 this.button72.Name = "button72";
+	 this.button72.Size = new System.Drawing.Size(23, 23);
+	 this.button72.TabIndex = 41;
+	 this.button72.Text = "?";
+	 this.button72.UseVisualStyleBackColor = true;
+	 this.button72.Click += new System.EventHandler(this.button72_Click);
 	 // 
 	 // Form1
 	 // 
 	 this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 	 this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 	 this.ClientSize = new System.Drawing.Size(956, 720);
+	 this.Controls.Add(this.button72);
+	 this.Controls.Add(this.button71);
+	 this.Controls.Add(this.cb_autocopy);
+	 this.Controls.Add(this.tb_datas_display);
 	 this.Controls.Add(this.button34);
 	 this.Controls.Add(this.tbchars);
 	 this.Controls.Add(this.button31);
-	 this.Controls.Add(this.cbquimicos);
+	 this.Controls.Add(this.tab_maintab);
 	 this.Controls.Add(this.button2);
 	 this.Controls.Add(this.tblaudo);
 	 this.Controls.Add(this.button1);
@@ -5088,9 +5149,11 @@
 	 this.gbrunit.PerformLayout();
 	 this.tabPage11.ResumeLayout(false);
 	 this.tabPage11.PerformLayout();
+	 this.groupBox11.ResumeLayout(false);
+	 this.groupBox11.PerformLayout();
 	 this.groupBox2.ResumeLayout(false);
 	 this.groupBox2.PerformLayout();
-	 this.cbquimicos.ResumeLayout(false);
+	 this.tab_maintab.ResumeLayout(false);
 	 this.tabPage4.ResumeLayout(false);
 	 this.tabPage4.PerformLayout();
 	 this.gbfrio1.ResumeLayout(false);
@@ -5140,8 +5203,6 @@
 	 this.groupBox7.ResumeLayout(false);
 	 this.groupBox7.PerformLayout();
 	 this.tabPage13.ResumeLayout(false);
-	 this.groupBox11.ResumeLayout(false);
-	 this.groupBox11.PerformLayout();
 	 this.ResumeLayout(false);
 	 this.PerformLayout();
 
@@ -5201,7 +5262,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker dbfim;
         private System.Windows.Forms.DateTimePicker dbinicio;
-        private System.Windows.Forms.TabControl cbquimicos;
+        private System.Windows.Forms.TabControl tab_maintab;
         private System.Windows.Forms.CheckBox cbelenaoacima250;
         private System.Windows.Forms.RadioButton rbeleacima250;
         private System.Windows.Forms.GroupBox gbbprof;
@@ -5272,7 +5333,7 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox tbouprofissaoppp;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.CheckBox cbunit;
+        private System.Windows.Forms.CheckBox cb_unidade_errada;
         private System.Windows.Forms.RadioButton rbrunaoinformado;
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.GroupBox gbrnimotivos;
@@ -5562,6 +5623,11 @@
 	private System.Windows.Forms.GroupBox groupBox11;
 	private System.Windows.Forms.Button button69;
 	private System.Windows.Forms.CheckBox cb_usou_NEN;
+	private System.Windows.Forms.TextBox tb_datas_display;
+	private System.Windows.Forms.CheckBox cb_autocopy;
+	private System.Windows.Forms.Button button70;
+	private System.Windows.Forms.Button button71;
+	private System.Windows.Forms.Button button72;
  }
 }
 

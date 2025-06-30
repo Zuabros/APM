@@ -537,7 +537,7 @@ namespace Aposent_o_matic
 
         };
 
-        janela j8b = new janela  // Periodo 01/01/04 - atual 
+        janela j8b = new janela  // Periodo 01/01/04 - 2014
         {
             num = 6,
             inicio = new DateTime(2004, 1, 1),
@@ -556,7 +556,7 @@ namespace Aposent_o_matic
         };
 
 
-        janela j9 = new janela  // Periodo 01/01/04 - atual 
+        janela j9 = new janela  // Periodo 2014+
         {
             num = 7,
             inicio = new DateTime(2014, 10, 8),
@@ -607,17 +607,29 @@ namespace Aposent_o_matic
         // ---------------------------------------------------------------------------------------
         void vesenquadra(janela j)
         {
-            if (!cbruidoperma.Checked) ruido.permanencia = false;
-            if (limite > j.limite) ruido.limite = true; // acima do limite 
-            if (!cbunit.Checked) ruido.unidade = true;  // unidade correta
-            if (metodo == j.metodo) ruido.metodo = true; // metodo identico 
-            if ((metodo == 1 || metodo == 2) && j.metodo == 12) ruido.metodo = true;  // um dos dois válidos
-            //if (metodo == 99) ruido.metodo = false;   
-            if ((metodo == 2 || metodo == 12) && j.metodo == 1 && cblayout.Checked) ruido.metodo = true;
-            
-            if (!cb_usou_NEN.Checked && j.metodo == 2)  ruido.especial = false; // seta flag de nao uso de NEN
+   ruido.permanencia = (cbruidoperma.Checked);
+   ruido.limite = (limite > j.limite); // verifica se o limite informado é maior que o limite do período
+	 ruido.unidade =  (!cb_unidade_errada.Checked) ;  // unidade correta
+	 ruido.metodo =
+		 (metodo == j.metodo) // método exato 
+		 || ((metodo == 1 || metodo == 2) && j.metodo == 12) // aceita qualquer um dos dois 
+		 || ((metodo == 2 || metodo == 12) && j.metodo == 1 && cblayout.Checked); // Aceita método novo na época velha (layout mantido)
+	 ruido.especial = cb_usou_NEN.Checked || metodo != 2; // seta true se usou NEN ou não é NHO
 
-            ruido.tudo = (ruido.limite && ruido.metodo && ruido.unidade && ruido.permanencia && ruido.outros);
+
+   // CASO PARTICULAR DO NEM 
+   if (j.num > 5 && metodo == 2 && !cb_usou_NEN.Checked) // NHO 01, mas não usou NEN
+   {
+    ruido.especial = false;
+   }
+
+		ruido.tudo = (
+		 ruido.limite &&
+		 ruido.metodo &&
+		 ruido.unidade &&
+		 ruido.permanencia &&
+		 ruido.especial // NEN
+	 ); // consolida todas as verificações em uma única flag
 
 	}
         
@@ -748,8 +760,8 @@ namespace Aposent_o_matic
         // -------------------------------------------------------------------------------------------------------------------------------------------
         void limpatudo()
         {
-            // limpa variaveis ruido 
-            ruido.limite = ruido.metodo = ruido.tudo = ruido.unidade = ruido.especial = false;
+   // limpa variaveis ruido 
+   ruido.limite = ruido.metodo = ruido.tudo = ruido.unidade = ruido.especial = ruido.tudo = true; ;
             ruido.permanencia = cbruidoperma.Checked; 
             popularuido(cbruido.Checked);
             // limpa variaveis eletricidade 
@@ -881,7 +893,7 @@ namespace Aposent_o_matic
                         if (rbruiminmax.Checked) laudo += "permanentemente ";
                         laudo += $"acima de {j.limite.ToString()} dB(A). ";
                     }
-                    if (cbunit.Checked && !rbrunaoinformado.Checked) // nao aceita unidade
+                    if (cb_unidade_errada.Checked && !rbrunaoinformado.Checked) // nao aceita unidade
                     {
                         laudo += $"A unidade de medida sonora informada no PPP ({cbbunit.SelectedItem.ToString()}) não é válida, somente sendo " +
                             $"aceita a unidade dB(A) ou NEN. ";
@@ -1846,8 +1858,8 @@ namespace Aposent_o_matic
         // -------------------------------------------------
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbbunit.SelectedIndex != 0) cbunit.Checked = true; // caso selecionar unidade esquisita, marca "não aceitar" por padrão
-            else cbunit.Checked = false;
+            if (cbbunit.SelectedIndex != 0) cb_unidade_errada.Checked = true; // caso selecionar unidade esquisita, marca "não aceitar" por padrão
+            else cb_unidade_errada.Checked = false;
         }
 
         private void toolTip1_Popup(object sender, PopupEventArgs e)
@@ -2010,7 +2022,7 @@ namespace Aposent_o_matic
      if (tb_empresa.Text != "") fracao += $"Empresa: {tb_empresa.Text}" + ENTER;
      if (fracs > 1) fracao += "Houve necessidade de fracionamento do período pelo perito, tendo em vista os nuances da legislação aplicável" +
                         " ao longo do tempo, conforme se segue: " + ENTER;
-                    else fracao += "Resumo do enquadramento: " + ENTER;
+                    //else fracao += "Resumo do enquadramento: " + ENTER;
                     // Iterate lista de periodos já fragmentados 
                     for (int i = 0; i < seg.Count; i++)
                     {
@@ -2054,11 +2066,17 @@ namespace Aposent_o_matic
             {
                 fala("Impossível continuar: Dados inseridos são inválidos. Corrigir ou reiniciar o aplicativo.");
             }
-        }
+	 if (cb_autocopy.Checked) // se estiver marcado, copia o laudo para a área de transferência 
+	 {
+		Clipboard.SetText(tblaudo.Text);
+	 }
+	}
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+   cb_usou_NEN.Checked = false; // reseta checkbox de NEN
+	 tbruivalue.Text = "";
+	 tb_datas_display.Text = "";
    tb_empresa.Text = "";
             cbvibra.Checked = false;
             gbvinter.Enabled = false;
@@ -2074,6 +2092,7 @@ namespace Aposent_o_matic
             cberg2.Checked = cbergo.Checked = cbfrio.Checked = cbfis.Checked = cbrni.Checked = 
             cbusacalor.Checked = cbumidade.Checked =  false;
             while (lbqfinal.Items.Count > 0) apagaum(); // apaga lista de quimicos 
+            tab_maintab.SelectedTab = tabPage11;
 	 rtbextrator.Focus(); // foca janela do extrator
 	}
 
@@ -2096,7 +2115,18 @@ namespace Aposent_o_matic
         private void cbbmetodo_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             rbmetodo.Checked = true;
-        }
+	 if (cbbmetodo.SelectedIndex == 2 && !cb_usou_NEN.Checked)
+	 {
+		cb_usou_NEN.ForeColor = Color.Red; // muda a cor do texto da checkbox para vermelho
+		cb_usou_NEN.Font = new Font(cb_usou_NEN.Font, FontStyle.Bold);
+	 }
+	 else
+	 {
+		cb_usou_NEN.ForeColor = SystemColors.ControlText; // reseta para a cor padrão
+		cb_usou_NEN.Font = new Font(cb_usou_NEN.Font, FontStyle.Regular);
+	 }
+
+	}
 
         private void checkBox12_CheckedChanged(object sender, EventArgs e)
         {
@@ -2164,9 +2194,10 @@ namespace Aposent_o_matic
                 gbrmeto.Enabled= gbrunit.Enabled= gbruido.Enabled =cblayout.Enabled = true;
             else
                gbrmeto.Enabled = gbrunit.Enabled = gbruido.Enabled = cblayout.Enabled = false;
-            
+   tbruivalue.Focus(); // foca campo de valor do ruido 
 
-        }
+
+	}
 
         private void cbeletricidade_CheckedChanged(object sender, EventArgs e)
         {
@@ -2446,19 +2477,19 @@ namespace Aposent_o_matic
 
         private void cbbunit_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbbunit.SelectedIndex == 0) { cbunit.Checked = false; cbunit.Enabled = false; }
+            if (cbbunit.SelectedIndex == 0) { cb_unidade_errada.Checked = false; cb_unidade_errada.Enabled = false; }
             else
             {
-                cbunit.Enabled = true;
-                cbunit.Checked = true;
+                cb_unidade_errada.Enabled = true;
+                cb_unidade_errada.Checked = true;
             }
 
         }
 
         private void cbunit_CheckedChanged(object sender, EventArgs e)
         {
-            if (cbbunit.SelectedIndex == 0) { cbunit.Checked = false; cbunit.Enabled = false; }
-            else cbunit.Enabled = true;
+            if (cbbunit.SelectedIndex == 0) { cb_unidade_errada.Checked = false; cb_unidade_errada.Enabled = false; }
+            else cb_unidade_errada.Enabled = true;
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -3501,7 +3532,7 @@ namespace Aposent_o_matic
 		// Altera a cor dos labels baseado no sucesso da extração
 		if (sucessoInicio)
 		{
-		 label2.ForeColor = Color.Blue;  // Azul para sucesso
+		 label2.ForeColor = Color.Green;  // Azul para sucesso
 		}
 		else
 		{
@@ -3510,12 +3541,19 @@ namespace Aposent_o_matic
 
 		if (sucessoFim)
 		{
-		 label3.ForeColor = Color.Blue;  // Azul para sucesso
+		 label3.ForeColor = Color.Green;  // Azul para sucesso
 		}
 		else
 		{
 		 label3.ForeColor = Color.Red;   // Vermelho para erro
 		}
+
+		// Se ambas datas foram extraídas com sucesso, exibe no formato desejado
+		if (sucessoInicio && sucessoFim)
+		{
+		 tb_datas_display.Text = $"{dbinicio.Value:dd/MM/yyyy} a {dbfim.Value:dd/MM/yyyy}";
+		}
+
 
 		// Popular o nome da empresa na textbox tb_empresa
 		if (!string.IsNullOrEmpty(nomeEmpresa) && tb_empresa != null)
@@ -3535,6 +3573,134 @@ namespace Aposent_o_matic
    fala("Períodos e Metodologias para Ruído:\r\nAté 18/11/2003:\r\n\r\nMetodologia: NR-15 (obrigatória)\r\nNão exigia NEN\r\n\r\n19/11/2003 a 31/12/2003:\r\n\r\nPeríodo de transição - eram aceitas duas metodologias:\r\n\r\nNR-15 (tradicional) OU\r\nNHO-01 da FUNDACENTRO (facultativa)\r\n\r\n\r\nSe usasse NHO-01, deveria usar NEN\r\n\r\nA partir de 1º/1/2004:\r\n\r\nMetodologia NHO-01 tornou-se obrigatória\r\nNEN passou a ser obrigatório\r\nLimite de tolerância: NEN superior a 85 dB(A)\r\n\r\nPontos importantes do manual:\r\n\r\n\"Para períodos a serem analisados a partir de 1º/1/2004 é obrigatório que seja utilizada a metodologia da NHO-01 da FUNDACENTRO, devendo estar consignado no PPP os valores de NPS expressos em NEN.\"\r\nA menção do uso da NEN deve constar no campo 15.4 (intensidade/concentração) ou no campo 15.5 (técnica utilizada) do PPP\r\nA simples menção da NHO-01 sem especificar o uso do NEN não é aceita, pois a NHO-01 inclui outras formas de aferição como Leq e TWA");
 	}
 
+	private void button70_Click(object sender, EventArgs e)
+	{
+
+
+	 MessageBox.Show("Este programa está sendo disponibilizado gratuitamente e foi fruto de meses de programação, testes e refinamento.\n\n" +
+		"Além do tempo em si, houve também custos com hospedagem do servidor e assinaturas dos serviços utilizados no projeto.\n\n" +
+		"Se quiser demonstrar sua gratidão me pagando uma pizza, fico feliz! Você pode fazer um Pix de qualquer valor para o \nCPF 021.864.729-88.",
+		 "Agradecimento",
+		 MessageBoxButtons.OK,
+		 MessageBoxIcon.Information
+	 );
+	}
+
+	// Método de criptografia por substituição simples de caracteres + reverse.
+	// Usado para proteger strings sensíveis no código-fonte contra edições ou leitura direta.
+	// Marcador #CM# (Cifra Montanha) indica texto cifrado.
+	// Adiciona REVERSE para deixar mais divertido e seguro!
+	// ----------------------------------------------------
+	// MÉTODO CIFRA MONTANHA - SUBSTITUIÇÃO SIMPLES + REVERSE
+	// ----------------------------------------------------
+	public static string cifraMontanha(string texto)
+	{
+	 // Gabarito de substituição
+	 string original = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ,!?;. !@#$%¨&*()-=][:<>";
+	 string cifrado = "WLygjSDROVAvbExsh;#itkMYcXwNU!Tzploa,CZIndK?JPBeQGfuFHmr$)(<¨%:@*!^q&-].=][>";
+
+	 // Verifica se o texto começa com o marcador #CM#
+	 bool ehTextoCifrado = texto.StartsWith("#CM#");
+
+	 string textoParaProcessar;
+	 bool cifrando;
+
+	 if (ehTextoCifrado)
+	 {
+		// É texto cifrado - remover marcador e descriptografar
+		textoParaProcessar = texto.Substring(4); // Remove "#CM#"
+		cifrando = false;
+	 }
+	 else
+	 {
+		// É texto normal - cifrar
+		textoParaProcessar = texto;
+		cifrando = true;
+	 }
+
+	 StringBuilder resultado = new StringBuilder();
+
+	 // Se está cifrando, primeiro aplica o reverse
+	 if (cifrando)
+	 {
+		char[] chars = textoParaProcessar.ToCharArray();
+		Array.Reverse(chars);
+		textoParaProcessar = new string(chars);
+	 }
+
+	 // Processa cada caractere fazendo a substituição
+	 foreach (char c in textoParaProcessar)
+	 {
+		if (cifrando)
+		{
+		 // Cifrando: procura na string original e substitui pela cifrada
+		 int index = original.IndexOf(c);
+		 if (index >= 0)
+		 {
+			resultado.Append(cifrado[index]);
+		 }
+		 else
+		 {
+			// Se não encontrou, mantém o caractere original
+			resultado.Append(c);
+		 }
+		}
+		else
+		{
+		 // Decifrando: procura na string cifrada e substitui pela original
+		 int index = cifrado.IndexOf(c);
+		 if (index >= 0)
+		 {
+			resultado.Append(original[index]);
+		 }
+		 else
+		 {
+			// Se não encontrou, mantém o caractere original
+			resultado.Append(c);
+		 }
+		}
+	 }
+
+	 string textoFinal = resultado.ToString();
+
+	 if (cifrando)
+	 {
+		// Se estava cifrando, adiciona o marcador no início
+		return "#CM#" + textoFinal;
+	 }
+	 else
+	 {
+		// Se estava decifrando, aplica reverse para voltar ao original
+		char[] chars = textoFinal.ToCharArray();
+		Array.Reverse(chars);
+		return new string(chars);
+	 }
+	}
+
+	private void button71_Click(object sender, EventArgs e)
+	{
+    tblaudo.Text = cifraMontanha(tblaudo.Text);
+
+	}
+
+	private void button72_Click(object sender, EventArgs e)
+	{
+   fala("Se marcada, o conteúdo do laudo será copiado automaticamente para a área de transferência ao finalizar o preenchimento");
+	}
+
+	// Exemplos de uso:
+	// 
+	// Para cifrar (automático):
+	// string textoCifrado = crypt("Teste 123");
+	// Processo: "Teste 123" → reverse → "321 etseT" → substituição → cifrado → "#CM#cifrado"
+	//
+	// Para decifrar (automático):
+	// string textoOriginal = crypt("#CM#cifrado");
+	// Processo: "#CM#cifrado" → remove marcador → substituição reversa → reverse → texto original
+	//
+	// Gabarito de substituição:
+	// Original: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ,!?;. !@#$%¨&*()-=][:<>"
+	// Cifrado:  "WLygjSDROVAvbExsh;#itkMYcXwNU!Tzploa,CZIndK?JPBeQGfuFHmr$)(<¨%:@*!^q&-].=][>"
 	private void tabPage1_Click(object sender, EventArgs e)
         {
 
